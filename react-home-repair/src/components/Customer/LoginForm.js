@@ -8,8 +8,8 @@ export default class LoginForm extends Component {
 	constructor() {
 		super();
 		this.state = {
-			username: 'ctanman',
-			password: 'password',
+			username: '',
+			password: '',
 			redirect: false
 		}
 
@@ -58,10 +58,10 @@ export default class LoginForm extends Component {
 			password: this.state.password
 		};
 
-		axios.post('http://localhost:8000/user/login', user)
+		axios.post('http://localhost:8000/users/login', user)
 			.then(res => {
 				const user = res.data.user;
-				if (user.length > 1) {
+				if (user.length >= 1) {
 					const userId = user[0]._id;
 					localStorage.setItem('userId', userId);
 					console.log(Auth.loginStatus);

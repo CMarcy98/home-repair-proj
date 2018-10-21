@@ -17,17 +17,18 @@ export default class SignUpForm extends Component {
 	constructor() {
 		super();
 		this.state = {
-			username: 'ctanman',
-			password: 'password',
-			firstName: 'Christian',
+			username: '',
+			password: '',
+			firstName: 'Emily',
 			lastName: 'Marcy',
-			email: 'christian.marcy@gmail.com',
-			phoneNumber: '732-759-1765',
-			address: '1902 S. Wanamassa Dr.',
-			city: 'Ocean',
-			state: 'NJ',
-			zipCode: '07712',
-			redirect: false
+			email: 'test@email.com',
+			phoneNumber: '732123456',
+			address: 'Test Address Rd.',
+			city: 'Farmville',
+			state: 'NY',
+			zipCode: '01923',
+			redirect: false,
+			usernameError: ''
 		};
 
 		this.submitForm = this.submitForm.bind(this);
@@ -38,12 +39,14 @@ export default class SignUpForm extends Component {
 			return <Redirect to="/customer/login" />;
 		}
 
+		const usernameError = this.state.usernameError.length > 0 ? <span style={{color: 'red'}}>({this.state.usernameError})</span> : "";
+
 		return (
 			<Form horizontal>
 				{/* Form group that holds the first name and last name fields */}
 				<FormGroup>
 					<Col lgOffset={1} lg={5}>
-						<ControlLabel>Username</ControlLabel>
+						<ControlLabel>Username {usernameError}</ControlLabel>
 						<FormControl type="text" placeholder='Username' value={this.state.username} onChange={event => { this.setState({ username: event.target.value }) }} />
 					</Col>
 					<Col lg={5}>
@@ -68,7 +71,7 @@ export default class SignUpForm extends Component {
 				<FormGroup>
 					<Col lgOffset={1} lg={5}>
 						<ControlLabel>Email Address</ControlLabel>
-						<FormControl type="email" placeholder='Email' value={this.state.firstName} onChange={event => { this.setState({ email: event.target.value }) }} />
+						<FormControl type="email" placeholder='Email' value={this.state.email} onChange={event => { this.setState({ email: event.target.value }) }} />
 						<Checkbox checked readOnly>Send me email updates</Checkbox>
 					</Col>
 					<Col lg={5}>
@@ -128,10 +131,13 @@ export default class SignUpForm extends Component {
 			zipCode: this.state.zipCode
 		};
 
-		axios.post('http://localhost:8000/user', user)
+		axios.post('http://localhost:8000/users', user)
 			.then(res => {
-				console.log('Data:', res.data);
-				this.setState({ redirect: true });
+				if(!res.data.error) {
+					this.setState({ redirect: true });
+				} else {
+					this.setState({ usernameError: res.data.error });
+				}
 			})
 			.catch(err => {
 				console.log('Error:', err);

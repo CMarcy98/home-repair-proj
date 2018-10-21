@@ -4,7 +4,6 @@ import { Redirect } from 'react-router';
 
 import './App.css';
 import Root from './components/Root';
-import HomePage from './components/HomePage';
 import SignUpPage from './components/Customer/SignUpPage';
 import ProviderPage from './components/ProviderPage';
 import IndexPage from './components/IndexPage';
