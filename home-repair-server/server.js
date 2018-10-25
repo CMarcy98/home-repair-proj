@@ -6,11 +6,8 @@ const mongoose = require('mongoose');
 
 const PORT = 8000;
 
-// Imported Schemas
-const User = require('./api/models/user');
-
-
 // All routes need to be registered here
+const userRoutes = require('./api/routes/users');
 const productRoutes = require('./api/routes/products');
 
 
@@ -18,37 +15,26 @@ const productRoutes = require('./api/routes/products');
 mongoose.connect("mongodb://localhost/home-repair", { useNewUrlParser: true }); 	// Establish database connection
 app.use(morgan('dev'));																// Logger for api
 app.use(bodyParser.urlencoded({extended: true}));			// Allows us to parse body of post request
+app.use(bodyParser.json());
+
+
+// Allows our RESTful API to be accessed by any server and not only the port that the serve is running on
+app.use((req, res, next) => {
+	// If we deploy to production, we change the star to our url to whitelist it
+	res.header('Access-Control-Allow-Origin', '*');
+	res.header('Access-Control-Allow-Headers','*');
+
+	if(req.method === 'OPTIONS') {
+		res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
+		return res.status(200).json({});
+	}
+	next();
+});
 
 
 // Tells the App specific routes to use using router in each file
 app.use('/products', productRoutes);
-
-
-// Tells the app the specific function to use at the specified
-app.post("/user", (req, res) => {
-	const firstName = req.body.firstName;
-	const lastName = req.body.lastName;
-	const newUser = {
-		firstName: firstName,
-		lastName: lastName
-	};
-
-	User.create(newUser, (err) => {
-		res.status(200).json({
-			message: 'User created!'
-		});
-	});
-});
-
-app.get("/user", (req, res) => {
-	User.find({}, (err, users) => {
-		if (!err) {
-			res.status(200).json({
-				users: users
-			});
-		}
-	});
-});
+app.use('/users', userRoutes);
 
 
 // App listens on 8000
