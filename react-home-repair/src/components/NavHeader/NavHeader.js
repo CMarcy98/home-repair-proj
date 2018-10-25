@@ -1,8 +1,7 @@
 import React, { Component }  from 'react';
 import { Link } from 'react-router-dom';
 import { Nav, NavItem, Navbar, NavDropdown, MenuItem } from 'react-bootstrap';
-import { IndexLinkContainer, LinkContainer } from 'react-router-bootstrap';
-import { Redirect } from 'react-router';
+import { LinkContainer } from 'react-router-bootstrap';
 
 import './NavHeader.css';
 

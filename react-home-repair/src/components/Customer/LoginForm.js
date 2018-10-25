@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Form, Col, FormGroup, FormControl, Checkbox, Button, ControlLabel } from 'react-bootstrap';
 import axios from "axios/index";
 import { Redirect } from 'react-router';
-import Auth from '../../auth/Auth';
 
 export default class LoginForm extends Component {
 	constructor() {
@@ -58,13 +57,13 @@ export default class LoginForm extends Component {
 			password: this.state.password
 		};
 
+		// Checks to see if the user is logged in
 		axios.post('http://localhost:8000/users/login', user)
 			.then(res => {
 				const user = res.data.user;
 				if (user.length >= 1) {
 					const userId = user[0]._id;
 					localStorage.setItem('userId', userId);
-					console.log(Auth.loginStatus);
 					this.setState({ redirect: true });
 				} else {
 					console.log('We dont have a valid user, send a message and show a red div that they do not exist...');

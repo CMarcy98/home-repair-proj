@@ -9,9 +9,14 @@
  * date: 10/9/18
  */
 import React, { Component } from 'react';
-import { Form, FormGroup, FormControl, Col, Button, ControlLabel, Checkbox } from 'react-bootstrap';
+import { Form, FormGroup, FormControl, Col, Button, ControlLabel, Checkbox, HelpBlock } from 'react-bootstrap';
 import axios from 'axios';
 import { Redirect } from 'react-router';
+
+const validationError = {
+	borderRadius: '5px',
+	borderColor: '#ff757c'
+};
 
 export default class SignUpForm extends Component {
 	constructor() {
@@ -28,7 +33,9 @@ export default class SignUpForm extends Component {
 			state: 'NY',
 			zipCode: '01923',
 			redirect: false,
-			usernameError: ''
+			usernameError: '',
+			passwordError: [],
+			submitted: false
 		};
 
 		this.submitForm = this.submitForm.bind(this);
@@ -43,15 +50,17 @@ export default class SignUpForm extends Component {
 
 		return (
 			<Form horizontal>
-				{/* Form group that holds the first name and last name fields */}
+				{/* Form group that holds the username and password fields */}
 				<FormGroup>
 					<Col lgOffset={1} lg={5}>
 						<ControlLabel>Username {usernameError}</ControlLabel>
-						<FormControl type="text" placeholder='Username' value={this.state.username} onChange={event => { this.setState({ username: event.target.value }) }} />
+						<FormControl style={(this.state.submitted && this.state.username.length < 4) ? validationError : {}} type="text" placeholder='Username' value={this.state.username} onChange={event => { this.setState({ username: event.target.value }) }} />
+						<HelpBlock style={{marginBottom: 0, fontSize: '0.8em'}}>Username should contain <em>4 characters</em></HelpBlock>
 					</Col>
 					<Col lg={5}>
 						<ControlLabel>Password</ControlLabel>
-						<FormControl type="password" placeholder='Password' value={this.state.password} onChange={event => { this.setState({ password: event.target.value }) }} />
+						<FormControl style={this.state.passwordError.length > 0 ? validationError: {}} type="password" placeholder='Password' value={this.state.password} onChange={event => { this.setState({ password: event.target.value }) }} />
+						<HelpBlock style={{marginBottom: 0, fontSize: '0.8em'}}>Password should contain <em>8 characters, one upper and lower case letter and one number</em></HelpBlock>
 					</Col>
 				</FormGroup>
 
@@ -118,6 +127,7 @@ export default class SignUpForm extends Component {
 	// Grabs all necessary information from the sign up form and posts it to the server
 	// Maybe we want to add some type of validation to make sure user fills in fields!
 	submitForm() {
+		this.setState({ submitted: true });
 		const user = {
 			username: this.state.username,
 			password: this.state.password,
@@ -131,16 +141,55 @@ export default class SignUpForm extends Component {
 			zipCode: this.state.zipCode
 		};
 
-		axios.post('http://localhost:8000/users', user)
-			.then(res => {
-				if(!res.data.error) {
-					this.setState({ redirect: true });
-				} else {
-					this.setState({ usernameError: res.data.error });
-				}
-			})
-			.catch(err => {
-				console.log('Error:', err);
-			});
+		const errorObj = this.checkPassword(this.state.password);
+
+		if (errorObj.length === 0 && this.state.username.length > 3) {
+			axios.post('http://localhost:8000/users', user)
+				.then(res => {
+					if (!res.data.error) {
+						this.setState({redirect: true});
+					} else {
+						this.setState({usernameError: res.data.error});
+					}
+				})
+				.catch(err => {
+					console.log('Error:', err);
+				});
+		} else {
+			this.setState({ passwordError: errorObj });
+		}
+	}
+
+	// Validates password for One Upper Case letter, One lower case letter,
+	// one digit, and length is greater than 7
+	checkPassword(password) {
+		// Error array so that we can tell the user what is wrong with the password
+		const error = [];
+
+		// Password length
+		if (password.length <= 7) {
+			error.push('Password needs to be at least 8 characters long.');
+		}
+
+		// One upper case letter
+		let regex = /[A-Z]{1}/;
+		if (!regex.test(password)) {
+			error.push('Password needs at least one upper case letter.');
+		}
+
+		// One lower case letter
+		regex = /[a-z]{1}/;
+		if(!regex.test(password)) {
+			error.push('Password needs at least one lower case letter.');
+		}
+
+		// One number
+		regex = /\d{1}/;
+		if (!regex.test(password)) {
+			error.push('Password needs at least one number.');
+		}
+
+		return error;
+
 	}
 }
