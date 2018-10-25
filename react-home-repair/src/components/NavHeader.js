@@ -1,9 +1,7 @@
 import React, { Component }  from 'react';
 import { Link } from 'react-router-dom';
-import { Nav, NavItem, Navbar, NavDropdown, MenuItem } from 'react-bootstrap';
+import { Nav, Navbar, NavDropdown, MenuItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-
-import './NavHeader.css';
 
 export default class NavHeader extends Component {
 	render() {
@@ -18,24 +16,29 @@ export default class NavHeader extends Component {
 				<Navbar.Collapse>
 					<Nav pullRight>
 						<NavDropdown eventKey={3} title="Customer" id="basic-nav-dropdown">
-
 							<LinkContainer to="/customer/login">
 								<MenuItem>Login</MenuItem>
 							</LinkContainer>
-
 							<LinkContainer to="/customer/signup">
 								<MenuItem>Sign Up</MenuItem>
 							</LinkContainer>
-
 							<LinkContainer id="sign-out-button" to="/">
 								<MenuItem onClick={() => {this.signUserOut()}}>Sign Out</MenuItem>
 							</LinkContainer>
 						</NavDropdown>
 
-						<LinkContainer to="/provider">
-							<NavItem eventKey={2}>Providers</NavItem>
-						</LinkContainer>
-
+						{/* Provider Dropdown*/}
+						<NavDropdown eventKey={4} title="Provider" id="basic-nav-dropdown">
+							<LinkContainer to="/provider/login">
+								<MenuItem>Login</MenuItem>
+							</LinkContainer>
+							<LinkContainer to="/provider/signup">
+								<MenuItem>Sign Up</MenuItem>
+							</LinkContainer>
+							<LinkContainer id="sign-out-button" to="/">
+								<MenuItem onClick={() => {this.signUserOut()}}>Sign Out</MenuItem>
+							</LinkContainer>
+						</NavDropdown>
 					</Nav>
 				</Navbar.Collapse>
 			</Navbar>
