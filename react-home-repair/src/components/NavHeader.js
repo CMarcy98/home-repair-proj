@@ -9,7 +9,7 @@ export default class NavHeader extends Component {
 			<Navbar inverse collapseOnSelect>
 				<Navbar.Header>
 					<Navbar.Brand>
-						<Link to="/">Home Repair</Link>
+						<Link to="/">Raccoon Repair</Link>
 					</Navbar.Brand>
 					<Navbar.Toggle/>
 				</Navbar.Header>

@@ -28,7 +28,7 @@ const ProviderPrivateRoute = ({ component: Component, ...rest }) => (
 	<Route {...rest} render={(props) => (
 		getLoginStatus() === true
 			? <Component {...props} />
-			: <Redirect to={"/customer/login"} />
+			: <Redirect to={"/provider/login"} />
 	)} />
 );
 

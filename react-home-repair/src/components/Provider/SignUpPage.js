@@ -5,11 +5,8 @@ import SignUpForm from "./SignUpForm";
 export default class SignUpPage extends Component {
 	render() {
 		return (
-			<div className="container">
+			<div className="container" style={{ width: '40%' }}>
 				<Panel>
-					<Panel.Heading>
-						<Panel.Title className="text-center" componentClass="h1">Provider Sign Up</Panel.Title>
-					</Panel.Heading>
 					<Panel.Body>
 						<SignUpForm/>
 					</Panel.Body>
