@@ -57,7 +57,7 @@ router.post("/", (req, res) => {
 
 // Endpoint to provide information about if there is an existing provider in the database
 router.post("/login", (req, res) => {
-	const { username,password } = req.body;
+	const { username, password } = req.body;
 
 	// Need to compare passwords using bcrypt functionality
 	Provider.find({ username: username }, (err, provider) => {

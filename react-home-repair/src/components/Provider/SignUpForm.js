@@ -13,12 +13,13 @@ export default class SignUpForm extends Component {
 		super();
 		this.state = {
 			username: 'test',
-			password: 'password',
+			password: 'Password1',
 			email: 'test@gmail.com',
 			firstName: 'Christian',
 			lastName: 'Marcy',
 			businessName: 'Rustys Repair Store',
 			businessPhone: '1238763456',
+			service: 'Electrical',
 			address: '101 Sally Ln.',
 			city: 'Test',
 			state: 'NJ',
@@ -78,6 +79,21 @@ export default class SignUpForm extends Component {
 							<FieldGroup style={{marginLeft: '5px'}} id={"7"} placeholder="Business phone" value={this.state.businessPhone} onChange={(e) => {this.setState({ businessPhone: e.target.value })}} />
 						</Col>
 
+						{/* Services offered */}
+						<Col lg={5} style={{ width: '150px' }}>
+							<p style={{ fontWeight: 100, fontSize: '11px' }}>Services provided:</p>
+						</Col>
+						<Col lg={5}>
+							<FormGroup>
+								<FormControl value={this.state.service} onChange={(e) => {this.setState({ service: e.target.value })}} componentClass="select">
+									<option value="" disabled selected>Service offered</option>
+									<option value="Electrical">Electrical</option>
+									<option value="Plumbing">Plumbing</option>
+									<option value="Other">Other</option>
+								</FormControl>
+							</FormGroup>
+						</Col>
+
 						{/* Address */}
 						<Col lg={12} style={{width: '101%'}}>
 							<FieldGroup id={"8"} placeholder="Street address (NO PO Box)" value={this.state.address} onChange={(e) => {this.setState({ address: e.target.value })}} />
@@ -103,12 +119,14 @@ export default class SignUpForm extends Component {
 						</Col>
 
 						{/* Terms and Agreements for users information */}
-						<p style={{fontSize: '12px'}}>
-							You have read and agree to <a>Raccoon Repair User Agreement, Privacy Policy</a>, and <a>E-Communication Delivery
-							Policy</a>. If you provide your mobile number and email, you confirm that you are authorized to add this number and give us
-							permission to contact you, along with others, about your branded Raccoon Repair accounts using text messages
-							and/or emails.
-						</p>
+						<Col lg={12} style={{paddingRight: 0, paddingLeft: 0}}>
+							<p style={{fontSize: '12px'}}>
+								You have read and agree to <a>Raccoon Repair User Agreement, Privacy Policy</a>, and <a>E-Communication Delivery
+								Policy</a>. If you provide your mobile number and email, you confirm that you are authorized to add this number and give us
+								permission to contact you, along with others, about your branded Raccoon Repair accounts using text messages
+								and/or emails.
+							</p>
+						</Col>
 
 						{/* Submit button so that user can sign up */}
 						<Col lg={4}>
@@ -133,7 +151,8 @@ export default class SignUpForm extends Component {
 			firstName: this.state.firstName,
 			lastName: this.state.lastName,
 			businessName: this.state.businessName,
-			phoneNumber: this.state.phoneNumber,
+			businessPhone: this.state.businessPhone,
+			service: this.state.service,
 			address: this.state.address,
 			city: this.state.city,
 			state: this.state.state,
@@ -144,12 +163,13 @@ export default class SignUpForm extends Component {
 
 		if (errorObj.length === 0 && this.state.username.length > 3) {
 			this.setState({ passwordError: false });
+			console.log(this.state);
 			axios.post('http://localhost:8000/providers', provider)
 				.then(res => {
 					if (!res.data.error) {
 						this.setState({redirect: true});
 					} else {
-						this.setState({usernameError: res.data.error});
+						this.setState({ usernameError: res.data.error });
 					}
 				})
 				.catch(err => {

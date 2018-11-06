@@ -11,7 +11,8 @@ const ProviderSchema = new mongoose.Schema({
 	address: String,
 	city: String,
 	state: String,
-	zipCode: String
+	zipCode: String,
+	service: String
 });
 
 module.exports = mongoose.model("Provider", ProviderSchema);
