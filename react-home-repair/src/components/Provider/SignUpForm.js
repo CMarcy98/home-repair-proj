@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Form, FormGroup, Col, FormControl, Button, HelpBlock} from 'react-bootstrap';
+import {Form, FormGroup, Col, FormControl, Button } from 'react-bootstrap';
 import axios from 'axios';
 import { Redirect } from 'react-router';
 
@@ -19,7 +19,7 @@ export default class SignUpForm extends Component {
 			lastName: 'Marcy',
 			businessName: 'Rustys Repair Store',
 			businessPhone: '1238763456',
-			service: 'Electrical',
+			service: '',
 			address: '101 Sally Ln.',
 			city: 'Test',
 			state: 'NJ',
@@ -83,12 +83,14 @@ export default class SignUpForm extends Component {
 						<Col lg={5} style={{ width: '150px' }}>
 							<p style={{ fontWeight: 100, fontSize: '11px' }}>Services provided:</p>
 						</Col>
-						<Col lg={5}>
+						<Col lg={6}>
 							<FormGroup>
 								<FormControl value={this.state.service} onChange={(e) => {this.setState({ service: e.target.value })}} componentClass="select">
-									<option value="" disabled selected>Service offered</option>
+									<option value="" disabled>Choose a service below</option>
 									<option value="Electrical">Electrical</option>
 									<option value="Plumbing">Plumbing</option>
+									<option value="Flooring">Flooring</option>
+									<option value="Contracting">Contracting</option>
 									<option value="Other">Other</option>
 								</FormControl>
 							</FormGroup>

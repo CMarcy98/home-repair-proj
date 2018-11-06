@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Col, FormGroup, FormControl, Checkbox, Button, ControlLabel } from 'react-bootstrap';
+import { Form, Col, FormGroup, Button } from 'react-bootstrap';
 import axios from "axios/index";
 import { Redirect } from 'react-router';
 import FieldGroup from '../FieldGroup';
@@ -75,8 +75,10 @@ export default class LoginForm extends Component {
 			// Checks to see if the user is logged in
 			axios.post('http://localhost:8000/providers/login', user)
 				.then(res => {
-					let errorMsg;
-					res.data.error ? (errorMsg = res.data.error) : null;
+					let errorMsg = null;
+					if (res.data.error) {
+						errorMsg = res.data.error;
+					}
 					const provider = res.data.provider;
 
 					// If there is a provider with the given username
