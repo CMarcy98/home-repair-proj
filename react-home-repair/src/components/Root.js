@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import NavHeader from "./NavHeader/NavHeader";
+import NavHeader from "./NavHeader";
 
 export default class Root extends Component {
 	render() {
