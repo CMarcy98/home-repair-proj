@@ -9,6 +9,7 @@ const PORT = 8000;
 // All routes need to be registered here
 const userRoutes = require('./api/routes/users');
 const productRoutes = require('./api/routes/products');
+const providerRoutes = require('./api/routes/providers');
 
 
 // Establish app settings and establish necessary connections
@@ -35,6 +36,7 @@ app.use((req, res, next) => {
 // Tells the App specific routes to use using router in each file
 app.use('/products', productRoutes);
 app.use('/users', userRoutes);
+app.use('/providers', providerRoutes);
 
 
 // App listens on 8000
