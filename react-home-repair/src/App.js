@@ -9,6 +9,7 @@ import ProviderPage from './components/ProviderPage';
 import IndexPage from './components/IndexPage';
 import LoginPage from "./components/Customer/LoginPage";
 import CustomerHomePage from './components/Customer/HomePage';
+import WorkTicketForm from './components/Customer/WorkTicketPage';
 
 const getLoginStatus = () => {
 	return (localStorage.getItem('userId')) ? true: false;
@@ -32,6 +33,7 @@ class App extends Component {
 					<Route path={"/customer/login"} component={LoginPage} />
 					<CustomerPrivateRoute path={"/customer/home"} component={CustomerHomePage} />
 					<Route path={"/provider"} component={ProviderPage} />
+					<Route path={"/customer/ticket"} component={WorkTicketForm} />
 				</Root>
       </BrowserRouter>
     );
