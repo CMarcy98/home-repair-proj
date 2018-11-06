@@ -8,6 +8,7 @@ import IndexPage from './components/IndexPage';
 import CustomerSignUpPage from './components/Customer/SignUpPage';
 import CustomerLoginPage from './components/Customer/LoginPage';
 import CustomerHomePage from './components/Customer/HomePage';
+import WorkTicketForm from './components/Customer/WorkTicketPage';
 import ProviderSignUpPage from './components/Provider/SignUpPage';
 import ProviderLoginPage from './components/Provider/LoginPage';
 import ProviderHomePage from './components/Provider/HomePage';
@@ -42,7 +43,9 @@ class App extends Component {
 					<Route path={"/customer/signup"} component={CustomerSignUpPage} />
 					<Route path={"/customer/login"} component={CustomerLoginPage} />
 					<CustomerPrivateRoute path={"/customer/home"} component={CustomerHomePage} />
+      		<Route path={"/customer/ticket"} component={WorkTicketForm} />
 					{/* Provider routes */}
+					<Route path={"/provider"} component={ProviderPage} />
 					<Route path={"/provider/signup"} component={ProviderSignUpPage} />
 					<Route path={"/provider/login"} component={ProviderLoginPage} />
 					<ProviderPrivateRoute path={"/provider/home"} component={ProviderHomePage} />
