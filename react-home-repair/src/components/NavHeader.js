@@ -6,7 +6,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 export default class NavHeader extends Component {
 	render() {
 		return (
-			<Navbar inverse collapseOnSelect>
+			<Navbar style={{marginBottom: 0}} inverse collapseOnSelect>
 				<Navbar.Header>
 					<Navbar.Brand>
 						<Link to="/">Raccoon Repair</Link>
@@ -21,6 +21,9 @@ export default class NavHeader extends Component {
 							</LinkContainer>
 							<LinkContainer to="/customer/signup">
 								<MenuItem>Sign Up</MenuItem>
+							</LinkContainer>
+							<LinkContainer to="/customer/ticket">
+								<MenuItem>Create a work repair ticket</MenuItem>
 							</LinkContainer>
 							<LinkContainer id="sign-out-button" to="/">
 								<MenuItem onClick={() => {this.signUserOut()}}>Sign Out</MenuItem>
