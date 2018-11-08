@@ -9,14 +9,9 @@
  * date: 10/30/18
  */
 import React, { Component } from 'react';
-import { Form, FormGroup, FormControl, Col, Button, ControlLabel, Checkbox, HelpBlock } from 'react-bootstrap';
+import { Form, FormGroup, FormControl, Col, Button, ControlLabel } from 'react-bootstrap';
 import axios from 'axios';
 import { Redirect } from 'react-router';
-
-const validationError = {
-	borderRadius: '5px',
-	borderColor: '#ff757c'
-};
 
 export default class WorkTicketForm extends Component {
 	constructor() {
@@ -34,7 +29,6 @@ export default class WorkTicketForm extends Component {
       service:  '',
 			description: '',
 			redirect: false,
-			usernameError: '',
 			submitted: false
 		}
 
@@ -43,7 +37,10 @@ export default class WorkTicketForm extends Component {
 
 //Anything put in here gets rendered to the screen
 	render() {
-	const usernameError = this.state.usernameError.length > 0 ? <span style={{color: 'red'}}>({this.state.usernameError})</span> : "";
+
+		if(this.state.redirect) {
+			return (<Redirect to="/customer/home" />);
+		}
 
 		return (
 			<div>
@@ -115,7 +112,7 @@ export default class WorkTicketForm extends Component {
 
 						<Col lgOffset={1} lg={4}>
       			<ControlLabel>Problem Description</ControlLabel>
-      			<FormControl onChange={(e) => { this.setState({ description: e.target.value }) }} componentClass="textarea" placeholder="Problem Description" />
+      			<FormControl onChange={(e) => { this.setState({ description: e.target.value }) }} componentClass="textarea" placeholder="Describe your problem here..." />
 						</Col>
 
 					</FormGroup>
@@ -133,7 +130,9 @@ export default class WorkTicketForm extends Component {
 
 	submitForm() {
 		this.setState({ submitted: true });
-		const user = {
+
+		// Constructs ticket object so that we can post to the server
+		const ticket = {
 			firstName: this.state.firstName,
 			lastName: this.state.lastName,
 			email: this.state.email,
@@ -146,7 +145,15 @@ export default class WorkTicketForm extends Component {
 			description: this.state.description
 		};
 
+		// Posts the ticket object to the server so that providers can see their tickets
+		axios.post('http://localhost:8000/tickets', ticket)
+			.then(res => {
+				this.setState({ redirect: true });
+				console.log('Result:', res);
+			})
+			.catch(err => {
+				console.log('Error:', err);
+			});
 
-				console.log(user);
 	}
 }

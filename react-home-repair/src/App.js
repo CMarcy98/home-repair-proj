@@ -43,7 +43,7 @@ class App extends Component {
 					<Route path={"/customer/signup"} component={CustomerSignUpPage} />
 					<Route path={"/customer/login"} component={CustomerLoginPage} />
 					<CustomerPrivateRoute path={"/customer/home"} component={CustomerHomePage} />
-      		<Route path={"/customer/ticket"} component={WorkTicketForm} />
+      		<CustomerPrivateRoute path={"/customer/ticket"} component={WorkTicketForm} />
 					{/* Provider routes */}
 					<Route path={"/provider/signup"} component={ProviderSignUpPage} />
 					<Route path={"/provider/login"} component={ProviderLoginPage} />

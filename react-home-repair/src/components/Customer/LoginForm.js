@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Form, Col, FormGroup, FormControl, Checkbox, Button, ControlLabel } from 'react-bootstrap';
+import { Form, Col, FormGroup, Button } from 'react-bootstrap';
 import axios from "axios/index";
 import { Redirect } from 'react-router';
+import FieldGroup from "../FieldGroup";
 
 export default class LoginForm extends Component {
 	constructor() {
@@ -22,31 +23,26 @@ export default class LoginForm extends Component {
 
 		return (
 			<Form horizontal>
-				<FormGroup controlId="formHorizontalEmail">
-					<Col componentClass={ControlLabel} sm={2}>Username</Col>
-					<Col sm={10}>
-						<FormControl type="text" placeholder="Username" value={this.state.username} onChange={event => { this.setState({ username: event.target.value }) }} />
-					</Col>
-				</FormGroup>
+				{/* Username field */}
+				<Col lgOffset={2} lg={8}>
+					<FieldGroup style={{ marginBottom: '10px' }} placeholder="Username" value={this.state.username}
+											onChange={(e) => {this.setState({ username: e.target.value })}} />
+				</Col>
 
-				<FormGroup controlId="formHorizontalPassword">
-					<Col componentClass={ControlLabel} sm={2}>Password</Col>
-					<Col sm={10}>
-						<FormControl type="password" placeholder="Password" value={this.state.password} onChange={event => { this.setState({ password: event.target.value }) }} />
-					</Col>
-				</FormGroup>
+				{/* Password field */}
+				<Col lgOffset={2} lg={8}>
+					<FieldGroup style={{ marginBottom: '10px' }} placeholder="Password" value={this.state.password}
+											type="password"
+											onChange={(e) => {this.setState({ password: e.target.value })}} />
+				</Col>
 
-				<FormGroup>
-					<Col smOffset={2} sm={10}>
-						<Checkbox>Remember me</Checkbox>
-					</Col>
-				</FormGroup>
+				{/* Submit button so that user can sign up */}
+				<Col lgOffset={2} lg={4}>
+					<FormGroup style={{paddingTop: '10px'}}>
+						<Button bsStyle="success" onClick={() => {this.loginUser()}}>Sign in</Button>
+					</FormGroup>
+				</Col>
 
-				<FormGroup>
-					<Col smOffset={2} sm={10}>
-						<Button onClick={this.loginUser}>Sign in</Button>
-					</Col>
-				</FormGroup>
 			</Form>
 		);
 	}

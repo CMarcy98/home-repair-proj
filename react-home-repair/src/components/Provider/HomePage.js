@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import SidebarMenu from './SidebarMenu';
 
-export default class IndexPage extends Component {
+export default class HomePage extends Component {
 	render() {
 		return (
 			<div>
-				<h1>Provider Home Page</h1>
-				<h5>User is logged in and is ready for more options</h5>
+				<SidebarMenu />
+				<div style={{ display: 'inline-block' }}>Div 2</div>
 			</div>
 		);
 	}
