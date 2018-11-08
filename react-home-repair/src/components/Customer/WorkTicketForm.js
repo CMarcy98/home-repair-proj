@@ -155,5 +155,14 @@ export default class WorkTicketForm extends Component {
 				console.log('Error:', err);
 			});
 
+		// Sends an email notification to provider that a customer has submitted a ticket
+		axios.post('http://localhost:8000/emails')
+			.then(res => {
+				console.log('Result:', res);
+			})
+			.catch(err => {
+				console.log('Error:', err);
+			});
+
 	}
 }
