@@ -47,7 +47,7 @@ export default class LoginForm extends Component {
 				{/* Submit button so that user can sign up */}
 				<Col lgOffset={2} lg={4}>
 					<FormGroup style={{paddingTop: '10px'}}>
-						<Button bsStyle="success" onClick={() => {this.loginProvider()}}>Agree and Continue</Button>
+						<Button bsStyle="success" onClick={() => {this.loginProvider()}}>Login</Button>
 					</FormGroup>
 				</Col>
 

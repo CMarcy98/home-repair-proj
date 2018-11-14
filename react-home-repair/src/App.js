@@ -11,7 +11,7 @@ import CustomerHomePage from './components/Customer/HomePage';
 import WorkTicketForm from './components/Customer/WorkTicketPage';
 import ProviderSignUpPage from './components/Provider/SignUpPage';
 import ProviderLoginPage from './components/Provider/LoginPage';
-import ProviderHomePage from './components/Provider/HomePage';
+import ProviderHomePage from './components/Provider/Dashboard';
 
 const getLoginStatus = () => {
 	return (localStorage.getItem('userId') !== null) ? true: false;
