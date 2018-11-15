@@ -4,14 +4,25 @@ const Ticket = require('../models/ticket');
 
 // Gets all tickets
 router.get('/', (req, res) => {
-	// Retrieves all tickets
-	Ticket.find({}, (err, tickets) => {
-		if (!err) {
+	// Check to see if there are any incoming parameters we need to search for
+	const statusCode = req.query.status;
+	if(parseInt(statusCode) === 0) {
+		console.log('Should be searching for tickets with 0');
+		Ticket.find({ status: 0 }, (err, tickets) => {
 			res.status(200).json({
 				tickets: tickets
 			});
-		}
-	});
+		});
+	} else {
+		// Retrieves all tickets
+		Ticket.find({}, (err, tickets) => {
+			if (!err) {
+				res.status(200).json({
+					tickets: tickets
+				});
+			}
+		});
+	}
 });
 
 
