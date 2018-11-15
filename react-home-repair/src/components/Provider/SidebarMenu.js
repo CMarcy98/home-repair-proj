@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './SidebarMenu.css';
 
 export default class SidebarMenu extends Component {
 	constructor(props) {
@@ -10,18 +11,24 @@ export default class SidebarMenu extends Component {
 
 	render() {
 		const itemStyle = {
-			textAlign: 'center',
 			paddingTop: '8%',
-			height: '65px',
-			borderBottom: '1px solid black'
+			height: '65px'
 		}
 
 		let items = this.state.items.map((title) => {
-			return <div key={title} onClick={() => {this.props.handleChange(title)}} style={itemStyle}>{title}</div>;
+			return <div className="menu-item fadeOut" key={title} onClick={() => {this.props.handleChange(title)}} style={itemStyle}>{title}</div>;
 		})
 
 		return (
-			<div style={{ width: '15vw', height: '92vh', borderRight: '1px solid black' }}>
+			<div style={{
+					width: '15vw',
+					height: '92vh',
+					borderRight: '1px solid black',
+					fontSize: '17px', fontWeight: 300,
+					backgroundColor: '#565356',
+					color: '#9f9ea0',
+					paddingLeft: '20px'
+				}}>
 				{items}
 			</div>
 		);
