@@ -31,8 +31,8 @@ export default class OpenTickets extends Component {
 
 		return (
 			<div>
-				<h2 style={{ marginTop: 0 }}>Open Tickets Page</h2>
-				<div id="ticket_container" style={{ overflowY: 'auto', height: '75vh' }}>
+				<h2 style={{ marginTop: 0, fontWeight: '100', backgroundColor: 'white', padding: '18px 0 18px 5%' }}>Open Tickets</h2>
+				<div id="ticket_container" style={{ overflowY: 'auto' }}>
 					{this.state.tickets.length > 0 ? tickets : noTickets}
 				</div>
 			</div>

@@ -11,7 +11,8 @@ export default class SidebarMenu extends Component {
 	render() {
 		const itemStyle = {
 			textAlign: 'center',
-			padding: '25px 0',
+			paddingTop: '8%',
+			height: '65px',
 			borderBottom: '1px solid black'
 		}
 
@@ -20,7 +21,7 @@ export default class SidebarMenu extends Component {
 		})
 
 		return (
-			<div style={{ width: '15vw', height: '100vh', borderRight: '1px solid black' }}>
+			<div style={{ width: '15vw', height: '92vh', borderRight: '1px solid black' }}>
 				{items}
 			</div>
 		);

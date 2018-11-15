@@ -13,6 +13,14 @@ import ProviderSignUpPage from './components/Provider/SignUpPage';
 import ProviderLoginPage from './components/Provider/LoginPage';
 import ProviderHomePage from './components/Provider/Dashboard';
 
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faStar, faThumbtack, faCommentAlt, faUserAlt } from '@fortawesome/free-solid-svg-icons';
+
+library.add(faStar);
+library.add(faThumbtack);
+library.add(faCommentAlt);
+library.add(faUserAlt);
+
 const getLoginStatus = () => {
 	return (localStorage.getItem('userId') !== null) ? true: false;
 };

@@ -16,6 +16,6 @@ export default class Container extends Component {
 	render() {
 		let component = this.state.items[this.props.component];
 
-		return (<div style={{ width: '85vw' }}>{component}</div>);
+		return (<div style={{ width: '85vw', height: '90vh', backgroundColor: '#EBEBEB'  }}>{component}</div>);
 	}
 }
