@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import SidebarMenu from './SidebarMenu';
-import Container from './Container';
+import SidebarMenu from './dashboard_components/SidebarMenu';
+import Container from './dashboard_components/Container';
 
 export default class Dashboard extends Component {
 	constructor() {

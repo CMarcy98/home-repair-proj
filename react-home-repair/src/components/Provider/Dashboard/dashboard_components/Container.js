@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import MyProfile from './dashboard_pages/MyProfile';
 import OpenTickets from "./dashboard_pages/OpenTickets";
+import AllTickets from "./dashboard_pages/AllTickets";
 
 export default class Container extends Component {
 	constructor(props) {
@@ -8,7 +9,8 @@ export default class Container extends Component {
 		this.state = {
 			items: {
 				'My Profile': <MyProfile />,
-				'Open Tickets': <OpenTickets/>
+				'Open Tickets': <OpenTickets/>,
+				'All Tickets': <AllTickets/>
 			}
 		}
 	}

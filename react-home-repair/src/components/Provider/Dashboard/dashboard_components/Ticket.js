@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button } from 'react-bootstrap';
+import TicketModal from "./TicketModal";
 
 const ticketStyle = {
 	margin: '20px 5%',
@@ -16,7 +17,7 @@ export default class Ticket extends Component {
 		this.state = {
 			provider: [],
 			customer: [],
-			clicked: false
+			showModal: false
 		}
 	}
 
@@ -29,8 +30,11 @@ export default class Ticket extends Component {
 		const { address, city, state, zipCode } = this.props.ticket;
 		const addressLine = `${address} ${city} ${state}, ${zipCode}`;
 		const ticketNum = `#${this.props.ticket._id}`;
-		const colorArray = ['#365EFF', '#FFAA0D', "#4DBD33"];
-		const backColor = colorArray[Math.floor(Math.random() * colorArray.length)];
+		const colorObj = {
+			orange: '#FFAA0D',
+			green: '#4DBD33'
+		};
+		const color = this.props.ticket.status === 0 ? colorObj['orange'] : colorObj['green'];
 
 		return (
 			<div style={ticketStyle}>
@@ -39,7 +43,7 @@ export default class Ticket extends Component {
 					{/* Ticket Number and Status code */}
 					<div style={{ width: '10%' }}>
 						<div>{ticketNum}</div>
-						<div style={{ backgroundColor: backColor, color: 'white', textAlign: 'center' }}>OPEN</div>
+						<div style={{ backgroundColor: color, color: 'white', textAlign: 'center' }}>{ this.props.ticket.status === 0 ? 'OPEN' : 'CLOSED' }</div>
 					</div>
 
 					{/* Address and description */}
@@ -70,9 +74,14 @@ export default class Ticket extends Component {
 								<div>{this.props.ticket.firstName} {this.props.ticket.lastName}</div>
 							</div>
 						</div>
-						<div style={{ width: '20%', margin: 'auto' }}><Button onClick={() => {this.setState({ clicked: !this.state.clicked })}} bsSize="xsmall" bsStyle="info">More Info</Button></div>
+						<div style={{ width: '20%', margin: 'auto' }}>
+							<Button onClick={() => {this.setState({ showModal: true })}} bsSize="xsmall" bsStyle="info">More Info</Button>
+						</div>
 					</div>
 				</div>
+
+				{/* Modal popup of customer ticket information */}
+				<TicketModal showModal={this.state.showModal} ticket={this.props.ticket} handleClose={() => {this.setState({ showModal: false })}}/>
 			</div>
 		);
 	}

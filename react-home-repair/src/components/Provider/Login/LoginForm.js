@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Form, Col, FormGroup, Button } from 'react-bootstrap';
 import axios from "axios/index";
 import { Redirect } from 'react-router';
-import FieldGroup from '../FieldGroup';
+import FieldGroup from '../../FieldGroup';
 
 export default class LoginForm extends Component {
 	constructor() {

@@ -12,11 +12,12 @@ export default class SidebarMenu extends Component {
 	render() {
 		const itemStyle = {
 			paddingTop: '8%',
-			height: '65px'
+			height: '65px',
+			cursor: 'pointer'
 		}
 
 		let items = this.state.items.map((title) => {
-			return <div className="menu-item fadeOut" key={title} onClick={() => {this.props.handleChange(title)}} style={itemStyle}>{title}</div>;
+			return <div className="menu-item" key={title} onClick={() => {this.props.handleChange(title)}} style={itemStyle}>{title}</div>;
 		})
 
 		return (

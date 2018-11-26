@@ -9,12 +9,14 @@ import CustomerSignUpPage from './components/Customer/SignUpPage';
 import CustomerLoginPage from './components/Customer/LoginPage';
 import CustomerHomePage from './components/Customer/HomePage';
 import WorkTicketForm from './components/Customer/WorkTicketPage';
-import ProviderSignUpPage from './components/Provider/SignUpPage';
-import ProviderLoginPage from './components/Provider/LoginPage';
-import ProviderHomePage from './components/Provider/Dashboard';
+import ProviderSignUpPage from './components/Provider/Signup/SignUpPage';
+import ProviderLoginPage from './components/Provider/Login/LoginPage';
+import ProviderHomePage from './components/Provider/Dashboard/Dashboard';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faStar, faThumbtack, faCommentAlt, faUserAlt } from '@fortawesome/free-solid-svg-icons';
+
+require('dotenv').config();
 
 library.add(faStar);
 library.add(faThumbtack);
