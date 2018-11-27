@@ -1,0 +1,45 @@
+#testID {
+  border: 1px solid black;
+}
+
+#home-page-container {
+  background-image: url("https://i.pinimg.com/originals/6c/af/0c/6caf0c7bbd2d7543d791a3319ed4bd58.jpg");
+}
+
+
+.test {
+  border: 1px solid blue;
+}
+
+#index_container {
+  width: auto;
+  height: auto;
+}
+
+#index_jumbo {
+  text-align: center;
+  border: 1px solid grey;
+}
+
+#index_carousel {
+  margin-top: 10%;
+  text-align: center;
+  position: static;
+  vertical-align: middle;
+  /* background-image: url("https://i.pinimg.com/originals/6c/af/0c/6caf0c7bbd2d7543d791a3319ed4bd58.jpg");
+  background-size: contain;
+  background-repeat: space; */
+}
+
+#index_h2 {
+  color: grey;
+}
+
+#index_para {
+  color: grey;
+}
+
+#index_car_img {
+  display: -webkit-inline-box;
+  position: relative;
+}
