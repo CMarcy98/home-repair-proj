@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import Sidebar from './Dashboard_Components/Sidebar';
 
 export default class IndexPage extends Component {
 	render() {
 		return (
 			<div>
-				<h1>Customer Home Page</h1>
-				<h5>User is logged in and is ready for more options</h5>
+				<Sidebar />
+				<div style={{ display: 'inline-block' }}>Div 2</div>
 			</div>
 		);
 	}

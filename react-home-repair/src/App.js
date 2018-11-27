@@ -7,11 +7,12 @@ import Root from './components/Root';
 import IndexPage from './components/IndexPage';
 import CustomerSignUpPage from './components/Customer/SignUpPage';
 import CustomerLoginPage from './components/Customer/LoginPage';
-import CustomerHomePage from './components/Customer/HomePage';
+import CustomerHomePage from './components/Customer/Dashboard_Components/Dashboard';
 import WorkTicketForm from './components/Customer/WorkTicketPage';
 import ProviderSignUpPage from './components/Provider/SignUpPage';
 import ProviderLoginPage from './components/Provider/LoginPage';
 import ProviderHomePage from './components/Provider/HomePage';
+
 
 const getLoginStatus = () => {
 	return (localStorage.getItem('userId') !== null) ? true: false;
