@@ -10,33 +10,32 @@ export default class AllTickets extends Component {
 		}
 	}
 
-	// // Component runs this function before it renders to the page
-	// componentWillMount() {
-	// 	axios.get('http://localhost:8000/tickets')
-	// 		.then(res => {
-	// 			this.setState({ tickets: res.data.tickets });
-	// 			console.log('Result for tickets:', res.data.tickets);
-	// 		})
-	// 		.catch(err => {
-	// 			console.log('Error:', err);
-	// 		});
-	// }
+	// Component runs this function before it renders to the page
+	componentWillMount() {
+		axios.get('http://localhost:8000/tickets')
+			.then(res => {
+				this.setState({ tickets: res.data.tickets });
+				console.log('Result for tickets:', res.data.tickets);
+			})
+			.catch(err => {
+				console.log('Error:', err);
+			});
+	}
 
 	// Renders this code at runtime
 	render() {
-		// const noTickets = <div>There are no tickets.</div>;
-		// const tickets = this.state.tickets.map((ticket) => {
-		// 	return <Ticket key={ticket._id} ticket={ticket} />;
-		// });
+		const noTickets = <div>There are no tickets.</div>;
+		const tickets = this.state.tickets.map((ticket) => {
+			return <Ticket key={ticket._id} ticket={ticket} />;
+		});
 
 		return (
-			<div>alltickets</div>
-			// <div>
-			// 	<h2 style={{ marginTop: 0 }}>All Tickets Page</h2>
-			// 	<div id="ticket_container" style={{ overflowY: 'auto', height: '75vh' }}>
-			// 		{this.state.tickets.length > 0 ? tickets : noTickets}
-			// 	</div>
-			// </div>
+			<div>
+				<h2 style={{ marginTop: 0, fontWeight: '100', backgroundColor: 'white', padding: '18px 0 18px 5%' }}>All Tickets</h2>
+				<div id="ticket_container" style={{ overflowY: 'auto', height: '650px' }}>
+					{this.state.tickets.length > 0 ? tickets : noTickets}
+				</div>
+			</div>
 		);
 	}
 }

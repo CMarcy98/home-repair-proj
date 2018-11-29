@@ -12,7 +12,7 @@ export default class MyProfile extends Component {
 
 		const email = this.state.profile
 		return (
-			<div>My Profile Page</div>
+			<h2 style={{ marginTop: 0, fontWeight: '100', backgroundColor: 'white', padding: '18px 0 18px 5%' }}>My Profile</h2>
 		);
 	}
 }

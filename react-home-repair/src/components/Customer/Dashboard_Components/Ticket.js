@@ -6,9 +6,9 @@ import TicketModal from "./TicketModal";
 const ticketStyle = {
 	margin: '20px 5%',
 	backgroundColor: 'white',
-	padding: '6px',
+	padding: '100px',
 	borderRadius: '8px',
-	boxShadow: '-3px 3px 4px rgba(0, 0, 0, 0.5)'
+	boxShadow: '-3px 3px 3px 4px rgba(0, 0, 0, 0.5)'
 };
 
 export default class Ticket extends Component {
