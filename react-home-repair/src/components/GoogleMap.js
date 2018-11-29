@@ -9,7 +9,7 @@ class GoogleMap extends Component {
 			lat: 39.707790,
 			lng: -75.113831
 		},
-		zoom: 13
+		zoom: 14
 	};
 
 	renderMarkers(map, maps) {

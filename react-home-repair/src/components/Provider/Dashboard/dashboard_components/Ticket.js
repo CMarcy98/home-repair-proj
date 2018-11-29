@@ -31,8 +31,8 @@ export default class Ticket extends Component {
 		const addressLine = `${address} ${city} ${state}, ${zipCode}`;
 		const ticketNum = `#${this.props.ticket._id}`;
 		const colorObj = {
-			orange: '#FFAA0D',
-			green: '#4DBD33'
+			green: '#FFAA0D',
+			orange: '#4DBD33'
 		};
 		const color = this.props.ticket.status === 0 ? colorObj['orange'] : colorObj['green'];
 

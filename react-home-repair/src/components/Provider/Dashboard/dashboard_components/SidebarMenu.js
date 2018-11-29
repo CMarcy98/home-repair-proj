@@ -23,7 +23,7 @@ export default class SidebarMenu extends Component {
 		return (
 			<div style={{
 					width: '15vw',
-					height: '92vh',
+					height: '94vh',
 					borderRight: '1px solid black',
 					fontSize: '17px', fontWeight: 300,
 					backgroundColor: '#565356',

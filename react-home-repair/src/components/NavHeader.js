@@ -38,6 +38,9 @@ export default class NavHeader extends Component {
 							<LinkContainer to="/provider/signup">
 								<MenuItem>Sign Up</MenuItem>
 							</LinkContainer>
+							<LinkContainer to="/provider/home">
+								<MenuItem>Home Page</MenuItem>
+							</LinkContainer>
 							<LinkContainer id="sign-out-button" to="/">
 								<MenuItem onClick={() => {this.signUserOut()}}>Sign Out</MenuItem>
 							</LinkContainer>

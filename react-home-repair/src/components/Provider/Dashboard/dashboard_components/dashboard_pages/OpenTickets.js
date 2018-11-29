@@ -32,7 +32,7 @@ export default class OpenTickets extends Component {
 		return (
 			<div>
 				<h2 style={{ marginTop: 0, fontWeight: '100', backgroundColor: 'white', padding: '18px 0 18px 5%' }}>Open Tickets</h2>
-				<div id="ticket_container" style={{ overflowY: 'auto' }}>
+				<div id="ticket_container" style={{ overflowY: 'auto', height: '650px' }}>
 					{this.state.tickets.length > 0 ? tickets : noTickets}
 				</div>
 			</div>
