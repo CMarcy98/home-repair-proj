@@ -7,6 +7,13 @@ mongoose.set('useNewUrlParser', true);
 const connection = mongoose.createConnection("mongodb://localhost/home-repair");
 increment.initialize(connection);
 
+// Added to accommodate the need for comments
+const commentSchema = new mongoose.Schema({
+	author: String,
+	content: String
+});
+
+
 // Schema of a work ticket
 const TicketSchema = new mongoose.Schema({
 	TicketId: Number,	//this will be the auto increment
@@ -23,7 +30,8 @@ const TicketSchema = new mongoose.Schema({
 	status: {
 		type: Number,
 		default: 0
-	}
+	},
+	comments: [commentSchema]
 });
 
 // Allows us to use the plugin to increment the number of tickets

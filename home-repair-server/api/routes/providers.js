@@ -96,13 +96,13 @@ router.post("/login", (req, res) => {
 });
 
 // Gets a specific provider
-router.get('/:userId', (req, res) => {
-	const id = req.params.userId;
+router.get('/:provId', (req, res) => {
+	const id = req.params.provId;
 
-	User.findById({ _id: id }, (err, user) => {
+	Provider.findById({ _id: id }, (err, provider) => {
 		if (!err) {
 			res.status(200).json({
-				user: user
+				provider: provider
 			});
 		}
 	});

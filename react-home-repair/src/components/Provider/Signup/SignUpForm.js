@@ -3,7 +3,7 @@ import {Form, FormGroup, Col, FormControl, Button } from 'react-bootstrap';
 import axios from 'axios';
 import { Redirect } from 'react-router';
 
-import FieldGroup from '../FieldGroup';
+import FieldGroup from '../../FieldGroup';
 import './SignUpForm.css';
 
 const errorMessage = <p style={{fontSize: '10px', marginBottom: 0}}>Password should contain <em>8 characters, one upper and lower case letter and one number</em></p>;
