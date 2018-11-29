@@ -14,7 +14,7 @@ import ProviderLoginPage from './components/Provider/Login/LoginPage';
 import ProviderHomePage from './components/Provider/Dashboard/Dashboard';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faStar, faThumbtack, faCommentAlt, faUserAlt } from '@fortawesome/free-solid-svg-icons';
+import { faStar, faThumbtack, faCommentAlt, faUserAlt, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 
 require('dotenv').config();
 
@@ -22,6 +22,7 @@ library.add(faStar);
 library.add(faThumbtack);
 library.add(faCommentAlt);
 library.add(faUserAlt);
+library.add(faUserCircle);
 
 const getLoginStatus = () => {
 	return (localStorage.getItem('userId') !== null) ? true: false;

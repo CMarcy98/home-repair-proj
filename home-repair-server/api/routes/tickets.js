@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Ticket = require('../models/ticket');
+const Comment = require('../models/comment');
 
 // Gets all tickets
 router.get('/', (req, res) => {
@@ -43,6 +44,36 @@ router.get('/:ticketId', (req, res) => {
 			}
 		}
 	});
+});
+
+
+// Adds comment to specific ticket given the id
+router.post('/:ticketId/comments', (req, res) => {
+	const id = req.params.ticketId;
+	Ticket.findById(id, (err, ticket) => {
+		if(err) {
+			res.status(200).json({
+				err: err
+			});
+		} else {
+			// Creating test comment
+			const testComment = {
+				author: req.body.author,
+				content: req.body.content
+			};
+			const newComment = new Comment(testComment);
+
+			// Push the new comment onto the ticket object
+			ticket.comments.push(newComment);
+
+			// Save it to the ticket object in the db
+			ticket.save((err, updatedTicket) => {
+				res.status(200).json({
+					ticket: updatedTicket
+				});
+			});
+		}
+	})
 });
 
 
