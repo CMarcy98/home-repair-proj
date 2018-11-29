@@ -10,7 +10,8 @@ export default class Comment extends Component {
 		}
 	}
 
-	componentWillMount() {
+	componentDidMount() {
+		console.log('Calling the api for user information');
 		axios.get(`http://localhost:8000/providers/${this.props.comment.author}`)
 			.then(res => {
 				this.setState({
@@ -23,10 +24,13 @@ export default class Comment extends Component {
 	}
 
 	render() {
+		const isEven = this.props.index % 2 === 0;
 		const style = {
 			paddingTop:'10px',
 			paddingBottom:'10px',
-			display: 'flex'
+			display: 'flex',
+			backgroundColor: isEven ? '#E8E8E8' : 'white',
+			borderRadius: isEven ? '7px' : '0px'
 		}
 
 		const comment = this.props.comment;

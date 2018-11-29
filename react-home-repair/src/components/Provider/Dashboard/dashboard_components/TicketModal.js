@@ -3,7 +3,6 @@ import { Modal, Button, Form, FormGroup, FormControl } from 'react-bootstrap';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Comment from './Comment';
-// import MapContainer from 'components/map';
 import GoogleMap from 'components/GoogleMap';
 
 export default class TicketModal extends Component {
@@ -20,8 +19,8 @@ export default class TicketModal extends Component {
 
 	render() {
 		const ticket = this.state.ticket;
-		const comments = ticket.comments.map((comment) => {
-			return <Comment key={Math.floor(Math.random() * 1000)} comment={comment} />
+		const comments = ticket.comments.map((comment, index) => {
+			return <Comment key={comment._id} comment={comment} index={index} />
 		});
 
 		return (
@@ -33,23 +32,28 @@ export default class TicketModal extends Component {
 					{/* Location information will include mao and detailed address and distance from provider*/}
 
 					<div>
-						<h4>Location Information</h4>
-						<hr />
-
+						<h4>Detailed Location Information</h4>
+						<hr style={{margin: '0 0 10px 0'}}/>
+						<h6><b>Address</b>: {ticket.address}</h6>
+						<h6><b>City</b>: {ticket.city}</h6>
+						<h6><b>State</b>: {ticket.state}</h6>
+						<h6><b>Zip Code</b>: {ticket.zipCode}</h6>
 						<GoogleMap />
 					</div>
 
 					{/* Description of problem stated by the customer who submitted the problem */}
-					<h4>Additional Information</h4>
-					<hr />
-					<p>{ticket.description}</p>
+					<div style={{paddingTop: '10%'}}>
+						<h4>Description of Problem</h4>
+						<hr style={{margin: '0 0 10px 0'}} />
+						<p>{ticket.description}</p>
+					</div>
 
-					<hr />
 
 					{/* Messages section where user can input messages and see comments */}
-					<div>
+					<div style={{paddingTop: '10%'}}>
 						{/*Header*/}
 						<p style={{fontSize: '16px'}}>Comments</p>
+						<hr style={{margin: '0 0 10px 0'}} />
 
 						{/*Div that holds the comments section*/}
 						<div style={{ color: 'flex' }}>
@@ -61,7 +65,7 @@ export default class TicketModal extends Component {
 									{/* Text area for user input */}
 									<Form style={{width: '90%'}}>
 										<FormGroup>
-											<FormControl value={this.state.comment} onChange={(e) => {this.setState({comment: e.target.value})}} onKeyDown={this.keyPress} type="textarea" placeholder="Add a comment..."/>
+											<FormControl value={this.state.comment} onChange={(e) => {this.setState({comment: e.target.value})}} onKeyDown={(e) => {this.keyPress(e)}} type="text" placeholder="Add a comment..."/>
 										</FormGroup>
 									</Form>
 								</div>
