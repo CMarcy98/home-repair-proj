@@ -1,15 +1,17 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 
 // All routes need to be registered here
 const userRoutes = require('./api/routes/users');
 const providerRoutes = require('./api/routes/providers');
 const ticketRoutes = require('./api/routes/tickets');
+const emailRoutes = require('./api/routes/emails');
 
 
 // Establish app settings and establish necessary connections
@@ -37,6 +39,7 @@ app.use((req, res, next) => {
 app.use('/users', userRoutes);
 app.use('/providers', providerRoutes);
 app.use('/tickets', ticketRoutes);
+app.use('/emails', emailRoutes);
 
 
 // App listens on 8000

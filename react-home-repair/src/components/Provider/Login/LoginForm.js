@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Form, Col, FormGroup, Button } from 'react-bootstrap';
 import axios from "axios/index";
 import { Redirect } from 'react-router';
-import FieldGroup from '../FieldGroup';
+import FieldGroup from '../../FieldGroup';
 
 export default class LoginForm extends Component {
 	constructor() {
@@ -47,7 +47,7 @@ export default class LoginForm extends Component {
 				{/* Submit button so that user can sign up */}
 				<Col lgOffset={2} lg={4}>
 					<FormGroup style={{paddingTop: '10px'}}>
-						<Button bsStyle="success" onClick={() => {this.loginProvider()}}>Agree and Continue</Button>
+						<Button bsStyle="success" onClick={() => {this.loginProvider()}}>Login</Button>
 					</FormGroup>
 				</Col>
 

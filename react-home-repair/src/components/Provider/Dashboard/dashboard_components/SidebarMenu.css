@@ -1,0 +1,9 @@
+.menu-item {
+    font-size: 1em;
+    transition: font-size 0.5s;
+}
+
+
+.menu-item:hover {
+    font-size: 1.2em;
+}
