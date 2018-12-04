@@ -1,17 +1,43 @@
 const express = require('express');
 const router = express.Router();
 const Ticket = require('../models/ticket');
+const User = require('../models/user');
 
 // Gets all tickets
+// localhost:8000/tickets/userId?5324.....
 router.get('/', (req, res) => {
+	// Variable to hold user Id for later use
+	const userId = req.query.userId;
+	console.log('user id:', userId);
+
+	if(userId) {
+		// Step 1: Find the user with the given user id
+		User.findOne({ _id: userId }, (err, user) => {
+			if(err) {
+				res.status(200).json('We had an error finding the user');
+			} else {
+				// We have the user information. Let's try to grab the ticket with the same user info!
+				Ticket.find({firstName: user.firstName, lastName: user.lastName}, (err, tickets) => {
+					if(!err) {
+						res.status(200).json({
+							user: user,
+							tickets: tickets
+						});
+					}
+				})
+			}
+		});
+		// Step 2: Find the ticket with the same first and last name associated with it.
+	} else {
 	// Retrieves all tickets
-	Ticket.find({}, (err, tickets) => {
-		if (!err) {
-			res.status(200).json({
-				tickets: tickets
-			});
-		}
-	});
+		Ticket.find({}, (err, tickets) => {
+			if (!err) {
+				res.status(200).json({
+					tickets: tickets
+				});
+			}
+		});
+	}
 });
 
 
