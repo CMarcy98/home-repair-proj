@@ -1,4 +1,4 @@
-/*import React, { Component } from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
 import CustomerModel from '../CustomerModel';
 
@@ -24,7 +24,7 @@ componentWillMount() {
 render() {
   const noUsers = <div>There are no customers.</div>;
   const users = this.state.users.map((user) => {
-    return <CustomerModel key={user._id} ticket={user} />;
+    return <CustomerModel key={user._id} user={user} />;
   });
 
   return (
@@ -36,4 +36,4 @@ render() {
     </div>
   );
 }
-}*/
+}
