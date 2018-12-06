@@ -12,11 +12,28 @@ export default class Comment extends Component {
 
 	componentDidMount() {
 		console.log('Calling the api for user information');
+    console.log('Author props:', this.props.comment);
+    // Gets specific user information using the 'author' identifier given by the mapping over in the ticket modal object
 		axios.get(`http://localhost:8000/providers/${this.props.comment.author}`)
 			.then(res => {
-				this.setState({
-					author: res.data.provider
-				});
+        // if the provider exists, then we set the author to the provider object
+        if(res.data.provider) {
+          this.setState({
+  					author: res.data.provider
+  				});
+        } else {
+          // Otherwise they are a customer in which case we go look up from the customer endpoint
+          axios.get(`http://localhost:8000/users/${this.props.comment.author}`)
+          .then(res => {
+            console.log('User found in customer');
+            this.setState({
+              author: res.data.user
+            });
+          })
+          .catch( err => {
+            console.log('Error:', err);
+          });
+        }
 			})
 			.catch( err => {
 				console.log('Error:', err);
@@ -35,7 +52,8 @@ export default class Comment extends Component {
 
 		const comment = this.props.comment;
 		const author = this.state.author;
-		const name = author.firstName ? `${author.firstName} ${author.lastName}` : '';
+    // console.log('Author', author);
+		const name = author ? `${author.firstName} ${author.lastName}` : '';
 
 		return (
 			<div style={style}>

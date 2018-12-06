@@ -4,7 +4,7 @@ import './Sidebar.css';
 export default class Sidebar extends Component {
 	constructor(props) {
 		super(props);
-		console.log('Props', props);
+		// console.log('Props', props);
 		this.state = {
 			items: ['My Profile', 'Active Tickets', 'All Tickets', 'Customer Home']
 		}
