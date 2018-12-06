@@ -12,7 +12,7 @@ import WorkTicketForm from './components/Customer/WorkTicketPage';
 import ProviderSignUpPage from './components/Provider/Signup/SignUpPage';
 import ProviderLoginPage from './components/Provider/Login/LoginPage';
 import ProviderHomePage from './components/Provider/Dashboard/Dashboard';
-import SiteOwnerHomePage from './components/SiteOwner/Home';
+import SiteOwnerHomePage from './components/SiteOwner/HomePage/Home';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faStar, faThumbtack, faCommentAlt, faUserAlt, faUserCircle } from '@fortawesome/free-solid-svg-icons';
