@@ -118,5 +118,20 @@ export default class TicketModal extends Component {
 			.catch(err => {
 				console.log('Error:', err);
 			});
+
+			// We need to send emails to everyone who has a comment on this tickets
+			// AKA find all the unique id's and send it to each person besides the person creating the comment
+			// tips: When loooping the array of comments ( wherever that is, make an object that is like array with the id's of authors)
+			// and add them to the oject/array if they are already not in it
+
+			// for(){
+			// 	axios.post('http://localhost:8000/emails/')
+			// 	.then(res =>{
+			// 		console.log('Result', res);
+			// 	})
+			// 	.catch(err=>{
+			// 		console.log('Err', err);
+			// 	})
+			// }
 	}
 }
