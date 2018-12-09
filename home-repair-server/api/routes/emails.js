@@ -11,6 +11,10 @@ const transporter = nodemailer.createTransport({
 });
 
 // Sends an email to specific provider with a specific message
+// Grab sender info from the request body along with the text
+
+// Refactor #1: We need to restructure endpoint to handle generix text input
+// Refactor #2: We need to handle multiple emails
 router.post('/', (req, res) => {
 	// Gathers information
 	const mailOptions = {

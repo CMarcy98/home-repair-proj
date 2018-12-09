@@ -98,6 +98,14 @@ export default class TicketModal extends Component {
 		}
 	}
 
+	// Responsible for sending the email to a specific user
+	sendEmail(user) {
+		console.log('User info', user.email)
+		// axios.post('http://localhost:8000/emails')
+		// .then()
+		// .catch();
+	}
+
 	// Submits comment to the server to store in the database
 	submitComment() {
 		const comment = {
@@ -105,26 +113,48 @@ export default class TicketModal extends Component {
 			content: this.state.comment
 		}
 
-		console.log('We are in the ticket modal:', comment);
-
-		axios.post(`http://localhost:8000/tickets/${this.state.ticket._id}/comments`, comment)
-			.then(res => {
-				// Assign data from the server and reset the comment field to reset it
-				this.setState({
-					ticket: res.data.ticket,
-					comment: ""
-				});
-			})
-			.catch(err => {
-				console.log('Error:', err);
-			});
+		// axios.post(`http://localhost:8000/tickets/${this.state.ticket._id}/comments`, comment)
+		// 	.then(res => {
+		// 		// Assign data from the server and reset the comment field to reset it
+		// 		this.setState({
+		// 			ticket: res.data.ticket,
+		// 			comment: ""
+		// 		});
+		// 	})
+		// 	.catch(err => {
+		// 		console.log('Error:', err);
+		// 	});
 
 			// We need to send emails to everyone who has a comment on this tickets
 			// AKA find all the unique id's and send it to each person besides the person creating the comment
-			// tips: When loooping the array of comments ( wherever that is, make an object that is like array with the id's of authors)
-			// and add them to the oject/array if they are already not in it
+			// tips: When looping the array of comments ( wherever that is, make an object that is like array with the id's of authors)
+			// add them to the oject/array if they are already not in it
 
-			// for(){
+			// We need to get the email information for the user and then send them an email after receiving their info from the api
+			this.props.authorIds.forEach((authorId) => {
+				// get individual info about user
+				axios.get(`http://localhost:8000/users/${authorId}`)
+				.then(result => {
+					if(result.data.user) {
+						this.sendEmail(result.data.user);
+					} else {
+						// The author is a provider and we need to get his information
+						axios.get(`http://localhost:8000/providers/${authorId}`)
+						.then(res => {
+							// We now have the user for sure
+							this.sendEmail(res.data.provider);
+						})
+						.catch(err => {
+							console.log('Error:', err);
+						});
+					}
+				})
+				.catch(err => {
+					console.log('Error:', err);
+				})
+			});
+
+			// for(localStorage.getItem('userId')){
 			// 	axios.post('http://localhost:8000/emails/')
 			// 	.then(res =>{
 			// 		console.log('Result', res);

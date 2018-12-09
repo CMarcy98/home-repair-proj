@@ -11,8 +11,8 @@ export default class Comment extends Component {
 	}
 
 	componentDidMount() {
-		console.log('Calling the api for user information');
-    console.log('Author props:', this.props.comment);
+		// console.log('Calling the api for user information');
+    // console.log('Author props:', this.props.comment);
     // Gets specific user information using the 'author' identifier given by the mapping over in the ticket modal object
 		axios.get(`http://localhost:8000/providers/${this.props.comment.author}`)
 			.then(res => {
@@ -25,7 +25,7 @@ export default class Comment extends Component {
           // Otherwise they are a customer in which case we go look up from the customer endpoint
           axios.get(`http://localhost:8000/users/${this.props.comment.author}`)
           .then(res => {
-            console.log('User found in customer');
+            // console.log('User found in customer');
             this.setState({
               author: res.data.user
             });

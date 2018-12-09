@@ -34,8 +34,17 @@ export default class Comment extends Component {
 		}
 
 		const comment = this.props.comment;
-		const author = this.state.author;
-		const name = author.firstName ? `${author.firstName} ${author.lastName}` : '';
+		// const author = this.state.author;
+		// Testing
+		// If the author's name does not equal undefined, set it to the first name other wise set it to ''
+		// let authorName;
+		// if(this.state.author.firstName) {
+		// 	authorName = this.state.author.firstName;
+		// } else {
+		// 	authorName = '';
+		// }
+		// console.log('New author name:', authorName);
+		// const name = this.state.author.firstName ? `${this.state.author.firstName} ${this.state.author.lastName}` : '';
 
 		return (
 			<div style={style}>
@@ -43,7 +52,7 @@ export default class Comment extends Component {
 					<FontAwesomeIcon style={{height: '35px', width: '35px'}} icon="user-circle"/>
 				</div>
 				<div style={{marginLeft: '10px'}}>
-					<div style={{fontSize: '14px'}}>{name}</div>
+					<div style={{fontSize: '14px'}}>{'hello'}</div>
 					<div style={{fontSize: '12px'}}>{comment.content}</div>
 				</div>
 			</div>
