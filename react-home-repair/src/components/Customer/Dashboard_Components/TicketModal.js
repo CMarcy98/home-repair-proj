@@ -98,12 +98,26 @@ export default class TicketModal extends Component {
 		}
 	}
 
-	// Responsible for sending the email to a specific user
+	// Responsible for sending the email to a specific user with message updating them that a new comment has arrived
 	sendEmail(user) {
-		console.log('User info', user.email)
-		// axios.post('http://localhost:8000/emails')
-		// .then()
-		// .catch();
+		// If the user is logged in and the email is in the user info passed in as the parameter, we do not need to notify them
+		// via email because they are already logged in and submitting the comment....
+		if(user._id !== localStorage.getItem('userId')) {
+			// Update message here....
+			const msg = "Updating the user that a new comment has been posted on the tciket you are involved in....";
+
+			// Post email to user via endpoint
+			axios.post('http://localhost:8000/emails', {
+				text: msg,
+				email: user.email
+			})
+			.then(res => {
+				console.log('Resulting info', res);
+			})
+			.catch(err => {
+				console.log('Error:', err);
+			});
+		}
 	}
 
 	// Submits comment to the server to store in the database
@@ -113,17 +127,17 @@ export default class TicketModal extends Component {
 			content: this.state.comment
 		}
 
-		// axios.post(`http://localhost:8000/tickets/${this.state.ticket._id}/comments`, comment)
-		// 	.then(res => {
-		// 		// Assign data from the server and reset the comment field to reset it
-		// 		this.setState({
-		// 			ticket: res.data.ticket,
-		// 			comment: ""
-		// 		});
-		// 	})
-		// 	.catch(err => {
-		// 		console.log('Error:', err);
-		// 	});
+		axios.post(`http://localhost:8000/tickets/${this.state.ticket._id}/comments`, comment)
+			.then(res => {
+				// Assign data from the server and reset the comment field to reset it
+				this.setState({
+					ticket: res.data.ticket,
+					comment: ""
+				});
+			})
+			.catch(err => {
+				console.log('Error:', err);
+			});
 
 			// We need to send emails to everyone who has a comment on this tickets
 			// AKA find all the unique id's and send it to each person besides the person creating the comment
@@ -132,7 +146,7 @@ export default class TicketModal extends Component {
 
 			// We need to get the email information for the user and then send them an email after receiving their info from the api
 			this.props.authorIds.forEach((authorId) => {
-				// get individual info about user
+				// Get individual info about user
 				axios.get(`http://localhost:8000/users/${authorId}`)
 				.then(result => {
 					if(result.data.user) {
@@ -153,15 +167,5 @@ export default class TicketModal extends Component {
 					console.log('Error:', err);
 				})
 			});
-
-			// for(localStorage.getItem('userId')){
-			// 	axios.post('http://localhost:8000/emails/')
-			// 	.then(res =>{
-			// 		console.log('Result', res);
-			// 	})
-			// 	.catch(err=>{
-			// 		console.log('Err', err);
-			// 	})
-			// }
 	}
 }

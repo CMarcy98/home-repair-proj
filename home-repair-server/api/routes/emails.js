@@ -18,10 +18,6 @@ const transporter = nodemailer.createTransport({
 // Notification for new work ticket
 // 'Hello Provider!\n\nWe at Raccoon Repair are pleased to tell you that there is a customer with a problem that you could possibly solve.' +
 //	' Go check your account to see if you can help that customer.\n\nHave a great day,\nRaccoon Repair Team'
-
-
-
-// Refactor #2: We need to handle multiple emails
 router.post('/', (req, res) => {
 	const mailOptions = {
 		from: 'raccoon.repair@gmail.com',
