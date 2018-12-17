@@ -17,12 +17,15 @@ export default class Ticket extends Component {
 		this.state = {
 			provider: [],
 			customer: [],
-			showModal: false
+			showModal: false,
+			authorIds: []
 		}
 	}
 
 	componentWillMount() {
-		// console.log('Pull provider and customer data from somewhere!', this.props.ticket);
+		// Logic to find all unique authors in the comment sections
+		const uniqueIds = [...new Set(this.props.ticket.comments.map(comment => comment.author))];
+		this.setState({ authorIds: uniqueIds });
 	}
 
 	render() {
@@ -81,7 +84,7 @@ export default class Ticket extends Component {
 				</div>
 
 				{/* Modal popup of customer ticket information */}
-				<TicketModal showModal={this.state.showModal} ticket={this.props.ticket} handleClose={() => {this.setState({ showModal: false })}}/>
+				<TicketModal authorIds={this.state.authorIds} showModal={this.state.showModal} ticket={this.props.ticket} handleClose={() => {this.setState({ showModal: false })}}/>
 			</div>
 		);
 	}

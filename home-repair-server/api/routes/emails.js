@@ -11,14 +11,19 @@ const transporter = nodemailer.createTransport({
 });
 
 // Sends an email to specific provider with a specific message
+// Grab sender info from the request body along with the text
+
+// Refactor #1: We need to restructure endpoint to handle generix text input
+
+// Notification for new work ticket
+// 'Hello Provider!\n\nWe at Raccoon Repair are pleased to tell you that there is a customer with a problem that you could possibly solve.' +
+//	' Go check your account to see if you can help that customer.\n\nHave a great day,\nRaccoon Repair Team'
 router.post('/', (req, res) => {
-	// Gathers information
 	const mailOptions = {
 		from: 'raccoon.repair@gmail.com',
-		to: 'marcyc3@students.rowan.edu',
+		to: req.body.email,
 		subject: 'Customer Ticket Awaiting!',
-		text: 'Hello Provider!\n\nWe at Raccoon Repair are pleased to tell you that there is a customer with a problem that you could possibly solve.' +
-			' Go check your account to see if you can help that customer.\n\nHave a great day,\nRaccoon Repair Team'
+		text: req.body.text
 	};
 
 	transporter.sendMail(mailOptions, function(error, info){
