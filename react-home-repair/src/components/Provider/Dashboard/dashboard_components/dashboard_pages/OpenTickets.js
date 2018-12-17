@@ -12,7 +12,7 @@ export default class OpenTickets extends Component {
 
 	// Component runs this function before it renders to the page
 	componentWillMount() {
-		axios.get('http://localhost:8000/tickets?status=0')
+		axios.get(`http://localhost:8000/tickets?status=0&provId=${localStorage.getItem('userId')}`)
 			.then(res => {
 				this.setState({ tickets: res.data.tickets });
 				console.log('Result for tickets:', res.data.tickets);
