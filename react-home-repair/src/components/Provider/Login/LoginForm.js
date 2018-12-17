@@ -32,6 +32,7 @@ export default class LoginForm extends Component {
 					<FieldGroup style={{ marginBottom: '10px' }} placeholder="Username" value={this.state.username}
 											error={this.state.usernameBlank || this.state.usernameNotFound.length > 0}
 											help={this.state.usernameNotFound}
+											onKeyDown={(e) => {this.keyPress(e)}}
 											onChange={(e) => {this.setState({ username: e.target.value })}} />
 				</Col>
 
@@ -41,6 +42,7 @@ export default class LoginForm extends Component {
 											type="password"
 											error={(this.state.passwordError ? true : false) || (this.state.usernameError)}
 											help={this.state.usernameError.length > 0 ? this.state.usernameError : false}
+											onKeyDown={(e) => {this.keyPress(e)}}
 											onChange={(e) => {this.setState({ password: e.target.value })}} />
 				</Col>
 
@@ -53,6 +55,14 @@ export default class LoginForm extends Component {
 
 			</Form>
 		);
+	}
+
+	// Allows the user to post a comment when they hit enter
+	keyPress(e) {
+		if(e.keyCode === 13) {
+			e.preventDefault();
+			this.loginProvider();
+		}
 	}
 
 	loginProvider() {

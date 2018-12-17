@@ -10,7 +10,8 @@ increment.initialize(connection);
 // Added to accommodate the need for comments
 const commentSchema = new mongoose.Schema({
 	author: String,
-	content: String
+	content: String,
+	timestamp: { type: Date, default: Date.now }
 });
 
 
