@@ -14,6 +14,8 @@ export default class MyProfile extends Component {
 		const userId = localStorage.getItem('userId');
 		axios.get(`http://localhost:8000/users/${userId}`)
 		.then(res => {
+			console.log('Resulting information:', res.data.user);
+			const newProfile = res.data.user;
 			this.setState({ profile: res.data.user });
 		})
 		.catch(err => {
@@ -33,6 +35,9 @@ export default class MyProfile extends Component {
 		const city = userInfo.city ? userInfo.city : '';
 		const state = userInfo.state ? userInfo.state : '';
 		const zipCode = userInfo.zipCode ? userInfo.zipCode : '';
+
+
+
 		return (
 			<div>
 				<h2 style={{ marginTop: 0, fontWeight: '100', backgroundColor: 'white', padding: '18px 0 18px 5%' }}>Hello, {firstName} {lastName}</h2>

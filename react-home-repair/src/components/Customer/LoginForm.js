@@ -26,6 +26,7 @@ export default class LoginForm extends Component {
 				{/* Username field */}
 				<Col lgOffset={2} lg={8}>
 					<FieldGroup style={{ marginBottom: '10px' }} placeholder="Username" value={this.state.username}
+											onKeyDown={(e) => {this.keyPress(e)}}
 											onChange={(e) => {this.setState({ username: e.target.value })}} />
 				</Col>
 
@@ -33,6 +34,7 @@ export default class LoginForm extends Component {
 				<Col lgOffset={2} lg={8}>
 					<FieldGroup style={{ marginBottom: '10px' }} placeholder="Password" value={this.state.password}
 											type="password"
+											onKeyDown={(e) => {this.keyPress(e)}}
 											onChange={(e) => {this.setState({ password: e.target.value })}} />
 				</Col>
 
@@ -45,6 +47,14 @@ export default class LoginForm extends Component {
 
 			</Form>
 		);
+	}
+
+	// Allows the user to sign in when they hit enter
+	keyPress(e) {
+		if(e.keyCode === 13) {
+			e.preventDefault();
+			this.loginUser();
+		}
 	}
 
 	loginUser() {

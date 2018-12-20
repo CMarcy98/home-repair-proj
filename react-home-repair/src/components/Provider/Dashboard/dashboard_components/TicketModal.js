@@ -97,6 +97,29 @@ export default class TicketModal extends Component {
 		}
 	}
 
+	// Responsible for sending the email to a specific user with message updating them that a new comment has arrived
+	sendEmail(user) {
+		// If the user is logged in and the email is in the user info passed in as the parameter, we do not need to notify them
+		// via email because they are already logged in and submitting the comment....
+		if(user._id !== localStorage.getItem('userId')) {
+			// Update message here....
+			const msg = "Updating the user that a new comment has been posted on the tciket you are involved in....";
+			console.log('Sending email to:', user.email);
+
+			// Post email to user via endpoint
+			axios.post('http://localhost:8000/emails', {
+				text: msg,
+				email: user.email
+			})
+				.then(res => {
+					console.log('Resulting info', res);
+				})
+				.catch(err => {
+					console.log('Error:', err);
+				});
+		}
+	}
+
 	// Submits comment to the server to store in the database
 	submitComment() {
 		const comment = {
@@ -115,5 +138,34 @@ export default class TicketModal extends Component {
 			.catch(err => {
 				console.log('Error:', err);
 			});
+
+		// We need to send emails to everyone who has a comment on this tickets
+		// AKA find all the unique id's and send it to each person besides the person creating the comment
+		// tips: When looping the array of comments ( wherever that is, make an object that is like array with the id's of authors)
+		// add them to the oject/array if they are already not in it
+
+		// We need to get the email information for the user and then send them an email after receiving their info from the api
+		this.props.authorIds.forEach((authorId) => {
+			// Get individual info about user
+			axios.get(`http://localhost:8000/users/${authorId}`)
+				.then(result => {
+					if(result.data.user) {
+						this.sendEmail(result.data.user);
+					} else {
+						// The author is a provider and we need to get his information
+						axios.get(`http://localhost:8000/providers/${authorId}`)
+							.then(res => {
+								// We now have the user for sure
+								this.sendEmail(res.data.provider);
+							})
+							.catch(err => {
+								console.log('Error:', err);
+							});
+					}
+				})
+				.catch(err => {
+					console.log('Error:', err);
+				})
+		});
 	}
 }

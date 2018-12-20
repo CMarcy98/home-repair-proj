@@ -13,7 +13,7 @@ export default class ActiveTickets extends Component {
 	// Component runs this function before it renders to the page
 	componentWillMount() {
 		const userId = localStorage.getItem('userId');
-		axios.get(`http://localhost:8000/tickets?userId=${userId}`)
+		axios.get(`http://localhost:8000/tickets?userId=${userId}&status=0`)
 			.then(res => {
 				this.setState({ tickets: res.data.tickets });
 				console.log('Result for tickets:', res.data.tickets);

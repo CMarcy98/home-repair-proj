@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
+const months = ['Jan.','Feb.','Mar.','Apr.','May','Jun.','Jul.','Aug.','Sept.','Oct.','Nov.','Dec.'];
+
 export default class Comment extends Component {
 	constructor(props) {
 		super(props);
@@ -11,12 +13,24 @@ export default class Comment extends Component {
 	}
 
 	componentDidMount() {
-		console.log('Calling the api for user information');
+		// console.log('Timestamp:'. this.props.comment);
 		axios.get(`http://localhost:8000/providers/${this.props.comment.author}`)
 			.then(res => {
-				this.setState({
-					author: res.data.provider
-				});
+				if(res.data.provider !== null) {
+					this.setState({
+						author: res.data.provider
+					});
+				} else {
+					axios.get(`http://localhost:8000/users/${this.props.comment.author}`)
+						.then(result => {
+							this.setState({
+								author: result.data.user
+							});
+						})
+						.catch(error => {
+							console.log('Error:', error);
+						});
+				}
 			})
 			.catch( err => {
 				console.log('Error:', err);
@@ -34,17 +48,15 @@ export default class Comment extends Component {
 		}
 
 		const comment = this.props.comment;
-		// const author = this.state.author;
-		// Testing
-		// If the author's name does not equal undefined, set it to the first name other wise set it to ''
-		// let authorName;
-		// if(this.state.author.firstName) {
-		// 	authorName = this.state.author.firstName;
-		// } else {
-		// 	authorName = '';
-		// }
-		// console.log('New author name:', authorName);
-		// const name = this.state.author.firstName ? `${this.state.author.firstName} ${this.state.author.lastName}` : '';
+		const date = new Date(comment.timestamp);
+		const month = months[date.getMonth()];
+		const day = date.getDate();
+		const year = date.getFullYear();
+		const hours = date.getHours();
+		const min = date.getMinutes();
+		const ampm = (hours > 11) ? 'pm' : 'am';
+
+		const formattedDate = `${month} ${day}, ${year}  ${(hours > 12 ) ? hours % 12 : hours}:${min} ${ampm}`;
 
 		return (
 			<div style={style}>
@@ -52,8 +64,11 @@ export default class Comment extends Component {
 					<FontAwesomeIcon style={{height: '35px', width: '35px'}} icon="user-circle"/>
 				</div>
 				<div style={{marginLeft: '10px'}}>
-					<div style={{fontSize: '14px'}}>{'hello'}</div>
+					<div style={{fontSize: '14px', display: 'flex'}}>
+						<div>{this.state.author.firstName} {this.state.author.lastName}</div>
+					</div>
 					<div style={{fontSize: '12px'}}>{comment.content}</div>
+					<div style={{fontSize: '12px'}}><em>{formattedDate}</em></div>
 				</div>
 			</div>
 		);
