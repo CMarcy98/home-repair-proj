@@ -4,7 +4,6 @@ import './Sidebar.css';
 export default class Sidebar extends Component {
 	constructor(props) {
 		super(props);
-		// console.log('Props', props);
 		this.state = {
 			items: ['My Profile', 'Active Tickets', 'All Tickets', 'Customer Home']
 		}
@@ -18,7 +17,7 @@ export default class Sidebar extends Component {
 		}
 
 		let items = this.state.items.map((title) => {
-			return <div className="menu-item" key={title} onClick={() => {this.props.handleChange(title)}} style={itemStyle}>{title}</div>;
+			return <div key={title} onClick={() => {this.props.handleChange(title)}} style={itemStyle}>{title}</div>;
 		})
 
 		return (

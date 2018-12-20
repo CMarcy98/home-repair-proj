@@ -13,6 +13,8 @@ router.get('/', (req, res) => {
 	const provId = req.query.provId;
 	const ticketStatus = Number(req.query.status);
 	const ticketType = req.query.type;
+	const firstName = req.query.firstName;
+	const description = req.query.description;
 
 	// We want information for these specific endpoints:
 	// 1. A provider that provides a certain type of service that is open status
@@ -25,6 +27,16 @@ router.get('/', (req, res) => {
 	// Second case: Provider wants open or closed tickets
 	if(ticketStatus === 0 || ticketStatus === 1) {
 		queryObj.status = ticketStatus;
+	}
+
+	// Add case to find tickets with specific user
+	if(firstName) {
+		queryObj.firstName = firstName;
+	}
+
+	// Add case to find tickets with specific description
+	if(description) {
+		queryObj.description = description;
 	}
 
 

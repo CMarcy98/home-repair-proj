@@ -56,7 +56,7 @@ export default class Comment extends Component {
 		const min = date.getMinutes();
 		const ampm = (hours > 11) ? 'pm' : 'am';
 
-		const formattedDate = `${month} ${day}, ${year}  ${hours % 12}:${min} ${ampm}`;
+		const formattedDate = `${month} ${day}, ${year}  ${(hours > 12 ) ? hours % 12 : hours}:${min} ${ampm}`;
 
 		return (
 			<div style={style}>
